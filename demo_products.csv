@@ -1,0 +1,16 @@
+name,sku,category,quantity,costPrice,sellingPrice
+Blue Wireless Mouse,MSE-001,Electronics,45,12,28
+Mechanical Keyboard,KBD-002,Electronics,20,35,75
+USB-C Hub (7-in-1),HUB-003,Electronics,30,18,45
+Office Chair Cushion,FRN-001,Furniture,15,8,22
+Standing Desk Mat,FRN-002,Furniture,25,10,30
+Noise Cancelling Earbuds,AUD-001,Electronics,3,40,95
+Laptop Cooling Pad,NB-001,Electronics,18,15,38
+Webcam HD 1080p,CAM-001,Electronics,12,22,55
+Whiteboard Markers Set,STN-001,Stationery,60,3,9
+A4 Paper (500 sheets),STN-002,Stationery,80,2,6
+Ballpoint Pens Box,STN-003,Stationery,100,1,4
+LED Desk Lamp,LGT-001,Office,10,14,35
+Extension Cord 5m,ELC-001,Office,2,8,20
+File Folders (Pack 20),STN-004,Stationery,40,4,12
+Sticky Notes (Pack 6),STN-005,Stationery,55,2,7

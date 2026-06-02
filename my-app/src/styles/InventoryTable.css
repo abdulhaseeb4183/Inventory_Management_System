@@ -1,0 +1,295 @@
+.inventory-table-container {
+  background: var(--card-bg);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.inventory-table thead tr {
+  background: rgba(0,0,0,0.02);
+  border-bottom: 1px solid var(--border);
+}
+
+.inventory-table th {
+  padding: 20px;
+  color: var(--text-h);
+}
+
+.inventory-table th.align-right {
+  text-align: right;
+}
+
+.inventory-table td {
+  padding: 20px;
+  vertical-align: top;
+}
+
+.inventory-table-row {
+  border-bottom: 1px solid var(--border);
+}
+
+.inventory-table-row.adjust-open {
+  border-bottom: none;
+}
+
+.inventory-product-name {
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.inventory-product-sku {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-top: 6px;
+  letter-spacing: 0.02em;
+}
+
+.inventory-product-category {
+  font-size: 12px;
+  color: var(--text);
+  margin-top: 6px;
+}
+
+.inventory-supplier-cell {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+.inventory-status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.inventory-status-badge.in-stock {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+.inventory-status-badge.low-stock {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.inventory-actions-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  align-items: center;
+}
+
+.inventory-btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+.inventory-btn-icon.accent {
+  color: var(--accent);
+}
+
+.inventory-btn-icon.default {
+  color: var(--text-h);
+}
+
+.inventory-btn-icon.danger {
+  color: #ef4444;
+}
+
+.inventory-adjust-row {
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.02);
+}
+
+.inventory-adjust-cell {
+  padding: 12px 20px 16px;
+}
+
+.inventory-adjust-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.inventory-adjust-label-left {
+  font-size: 13px;
+  color: var(--text);
+  margin-right: auto;
+}
+
+.inventory-adjust-label {
+  font-size: 12px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.inventory-input-compact {
+  width: 56px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  font-size: 13px;
+  font-family: inherit;
+  text-align: center;
+}
+
+.inventory-btn-compact {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.inventory-btn-compact.stock-in {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.inventory-btn-compact.stock-out {
+  border-color: var(--danger, #ef4444);
+  color: var(--danger, #ef4444);
+}
+
+.inventory-empty-state {
+  padding: 40px;
+  text-align: center;
+  color: var(--text);
+}
+
+/* ── Filter bar ── */
+.inv-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.01);
+}
+
+.inv-filter-input {
+  flex: 1 1 200px;
+  min-width: 160px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.inv-filter-input:focus {
+  border-color: var(--accent);
+}
+
+.inv-filter-select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.inv-filter-select:focus {
+  border-color: var(--accent);
+}
+
+.inv-filter-clear {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: none;
+  color: var(--text);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.inv-filter-clear:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.inv-filter-count {
+  font-size: 12px;
+  color: var(--text);
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* ── Margin badge ── */
+.margin-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.margin-badge.good {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+}
+
+.margin-badge.warn {
+  background: rgba(234, 179, 8, 0.15);
+  color: #a16207;
+}
+
+.margin-badge.low {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+/* ── Delete confirmation inline ── */
+.inv-delete-confirm {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: fadeInConfirm 0.15s ease;
+}
+
+.inv-delete-confirm-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ef4444;
+}
+
+@keyframes fadeInConfirm {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+

@@ -1,0 +1,36 @@
+# ── Environment / Secrets ── NEVER commit these ──
+.env
+.env.local
+.env.production
+.env*.local
+
+# ── Node dependencies ──
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Build outputs ──
+dist/
+dist-ssr/
+build/
+
+# ── Logs ──
+logs/
+*.log
+
+# ── OS / Editor ──
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ── Misc ──
+*.local
+*.zip

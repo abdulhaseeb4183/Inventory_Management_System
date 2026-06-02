@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #f8f9fa;
+  --card-bg: #ffffff;
+  --border: #e5e4e7;
+  --accent: #aa3bff;
+  --accent-hover: #8e2de2;
+  --danger: #ef4444;
+  --success: #10b981;
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --sans: 'Inter', system-ui, sans-serif;
+}
+
+.dark-mode {
+  --text: #9ca3af;
+  --text-h: #f3f4f6;
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --border: #334155;
+  --accent: #c084fc;
+  --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+#root {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-h);
+  margin: 0;
+  letter-spacing: -0.025em;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+/* Landing page — entrance & ambient motion */
+.landing-page .lp-skip-transition {
+  transition: none !important;
+}
+
+@keyframes lpFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lpFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes lpFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes lpOrb {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.45; }
+  33% { transform: translate(3%, -2%) scale(1.05); opacity: 0.65; }
+  66% { transform: translate(-2%, 3%) scale(0.98); opacity: 0.55; }
+}
+
+@keyframes lpShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.landing-page .lp-shimmer-bar {
+  height: 3px;
+  width: 76px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--success), var(--accent));
+  background-size: 220% 100%;
+  animation: lpShimmer 5s linear infinite;
+}
+
+@keyframes lpBarPulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.85; }
+}
+
+.landing-page .lp-hero-preview {
+  animation: lpFloat 7s ease-in-out infinite;
+}
+
+.landing-page .lp-orb-a {
+  animation: lpOrb 18s ease-in-out infinite;
+}
+
+.landing-page .lp-orb-b {
+  animation: lpOrb 22s ease-in-out infinite reverse;
+}
+
+.landing-page .lp-mock-bar {
+  animation: lpBarPulse 2.4s ease-in-out infinite;
+}
+
+.landing-page .lp-mock-bar:nth-child(2) { animation-delay: 0.3s; }
+.landing-page .lp-mock-bar:nth-child(3) { animation-delay: 0.6s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-page .lp-skip-transition {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+  .landing-page .lp-shimmer-bar {
+    animation: none;
+    background: var(--accent);
+  }
+  .landing-page .lp-hero-preview,
+  .landing-page .lp-orb-a,
+  .landing-page .lp-orb-b,
+  .landing-page .lp-mock-bar {
+    animation: none !important;
+  }
+}
+
+.landing-hero-grid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: center;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 960px) {
+  .landing-hero-grid {
+    grid-template-columns: 1.08fr 0.92fr;
+  }
+}
+
+.landing-feature-card {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease !important;
+}
+
+.landing-feature-card:hover {
+  transform: translateY(-8px);
+}
+
+.dark-mode .landing-feature-card:hover {
+  box-shadow: 0 28px 50px -16px rgba(0, 0, 0, 0.55) !important;
+}
+
+:not(.dark-mode) .landing-feature-card:hover {
+  box-shadow: 0 24px 44px -14px rgba(15, 23, 42, 0.12) !important;
+}
+
+.landing-btn-primary {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease !important;
+}
+
+.landing-btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+}
+
+/* Purchase order modal: print-friendly (hide chrome, simplify layout) */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .po-modal-backdrop,
+  .po-modal-backdrop * {
+    visibility: visible;
+  }
+  .po-modal-backdrop {
+    position: absolute !important;
+    inset: 0 !important;
+    background: none !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+  .po-print-document {
+    box-shadow: none !important;
+    border: none !important;
+    max-height: none !important;
+    border-radius: 0 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .invoice-modal-backdrop,
+  .invoice-modal-backdrop * {
+    visibility: visible;
+  }
+  .invoice-modal-backdrop {
+    position: absolute !important;
+    inset: 0 !important;
+    background: none !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+  .invoice-print-document {
+    box-shadow: none !important;
+    border: none !important;
+    max-height: none !important;
+    border-radius: 0 !important;
+  }
+}

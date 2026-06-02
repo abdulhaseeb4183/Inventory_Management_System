@@ -1,0 +1,253 @@
+/* ── Financial Dashboard ── */
+.fin-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.fin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.fin-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.fin-header p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ── Period toggle ── */
+.fin-period-toggle {
+  display: flex;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.fin-period-btn {
+  background: none;
+  border: none;
+  padding: 0.35rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: all 0.2s;
+}
+
+.fin-period-btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.fin-period-btn:hover:not(.active) {
+  background: var(--border);
+  color: var(--text-main);
+}
+
+/* ── Empty state ── */
+.fin-empty-state {
+  background: var(--card-bg);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  padding: 3rem;
+  text-align: center;
+}
+
+.fin-empty-state span {
+  font-size: 3rem;
+}
+
+.fin-empty-state h3 {
+  margin: 0.75rem 0 0.25rem;
+  font-size: 1.1rem;
+}
+
+.fin-empty-state p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ── KPI Grid ── */
+.fin-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  gap: 1rem;
+}
+
+.fin-kpi-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 4px 6px var(--shadow-color);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.fin-kpi-card:hover {
+  transform: translateY(-2px);
+}
+
+.fin-kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px;
+  height: 100%;
+}
+
+.fin-kpi-card.accent-green::before { background: #10b981; }
+.fin-kpi-card.accent-red::before   { background: #ef4444; }
+.fin-kpi-card.accent-blue::before  { background: #6366f1; }
+.fin-kpi-card.accent-purple::before{ background: #a78bfa; }
+.fin-kpi-card.accent-amber::before { background: #f59e0b; }
+
+.fin-kpi-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+
+.fin-kpi-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fin-kpi-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+}
+
+/* ── Cards ── */
+.fin-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.fin-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.fin-card-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.fin-card-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(99, 102, 241, 0.12);
+  color: #6366f1;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+}
+
+/* ── Two-column row ── */
+.fin-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 860px) {
+  .fin-two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Tables ── */
+.fin-table-wrap {
+  overflow-x: auto;
+}
+
+.fin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.fin-table th {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+
+.fin-table td {
+  padding: 0.7rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.fin-table tr:last-child td {
+  border-bottom: none;
+}
+
+.fin-table tr:hover td {
+  background: rgba(99, 102, 241, 0.04);
+}
+
+.fin-table th.num,
+.fin-table td.num {
+  text-align: right;
+}
+
+.fin-table td.positive {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.fin-table td.negative {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.fin-table td.sku-cell {
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ── Margin Pills ── */
+.margin-pill {
+  font-weight: 700;
+  padding: 0.2rem 0;
+}
+
+.margin-pill.good  { color: #10b981; }
+.margin-pill.ok    { color: #f59e0b; }
+.margin-pill.low   { color: #ef4444; }

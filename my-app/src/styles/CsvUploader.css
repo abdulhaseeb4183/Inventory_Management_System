@@ -1,0 +1,90 @@
+.csv-uploader-card {
+  background: var(--card-bg);
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+}
+
+.csv-uploader-card:hover {
+  border-color: var(--accent);
+  background: rgba(99, 102, 241, 0.02);
+}
+
+.csv-content-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.csv-title {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-h);
+  font-weight: 600;
+}
+
+.csv-desc {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.csv-desc code {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.15rem 0.3rem;
+  border-radius: 4px;
+  font-family: monospace;
+}
+.dark-mode .csv-desc code {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.csv-file-input {
+  display: block;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--text-h);
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.csv-file-input::file-selector-button {
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.csv-file-input::file-selector-button:hover {
+  background-color: #4f46e5;
+}
+
+.csv-error-msg {
+  color: var(--danger, #ef4444);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 0.75rem;
+  border-radius: 6px;
+  border-left: 3px solid var(--danger, #ef4444);
+}
+
+.csv-success-msg {
+  color: var(--success, #10b981);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 0.75rem;
+  border-radius: 6px;
+  border-left: 3px solid var(--success, #10b981);
+}
