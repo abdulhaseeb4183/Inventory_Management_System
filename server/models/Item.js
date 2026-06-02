@@ -8,6 +8,7 @@ const ItemSchema = new mongoose.Schema(
     quantity:     { type: Number, default: 0, min: 0 },
     costPrice:    { type: Number, default: 0, min: 0 },
     sellingPrice: { type: Number, default: 0, min: 0 },
+    supplierName: { type: String, default: '', trim: true },
   },
   { timestamps: true }
 );

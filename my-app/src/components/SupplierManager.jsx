@@ -6,7 +6,7 @@ const emptyForm = {
   name: '',
   email: '',
   phone: '',
-  leadTimeDays: '',
+  address: '',
 };
 
 export default function SupplierManager({ suppliers, onAddSupplier, onUpdateSupplier, onDeleteSupplier }) {
@@ -20,7 +20,7 @@ export default function SupplierManager({ suppliers, onAddSupplier, onUpdateSupp
         name: editingSupplier.name ?? '',
         email: editingSupplier.email ?? '',
         phone: editingSupplier.phone ?? '',
-        leadTimeDays: editingSupplier.leadTimeDays ?? '',
+        address: editingSupplier.address ?? '',
       });
     } else {
       setForm(emptyForm);
@@ -31,13 +31,11 @@ export default function SupplierManager({ suppliers, onAddSupplier, onUpdateSupp
     e.preventDefault();
     const name = form.name.trim();
     if (!name) return;
-    const lt = parseInt(form.leadTimeDays, 10);
-    const leadTimeDays = form.leadTimeDays === '' ? '' : (Number.isFinite(lt) ? Math.max(0, lt) : 0);
     const payload = {
       name,
       email: form.email.trim(),
       phone: form.phone.trim(),
-      leadTimeDays,
+      address: form.address.trim(),
     };
 
     if (editingSupplier) {
@@ -53,13 +51,11 @@ export default function SupplierManager({ suppliers, onAddSupplier, onUpdateSupp
     data.forEach((row) => {
       const name = (row.name || '').trim();
       if (!name) return;
-      const lt = parseInt(row.leadTimeDays, 10);
-      const leadTimeDays = row.leadTimeDays === '' || row.leadTimeDays == null ? '' : (Number.isFinite(lt) ? Math.max(0, lt) : 0);
       onAddSupplier({
         name,
         email: (row.email || '').trim(),
         phone: (row.phone || '').trim(),
-        leadTimeDays,
+        address: (row.address || '').trim(),
       });
     });
   };
@@ -100,14 +96,12 @@ export default function SupplierManager({ suppliers, onAddSupplier, onUpdateSupp
             placeholder="+1 (555) 000-0000"
           />
 
-          <label className="supplier-form-label">Lead time (days)</label>
+          <label className="supplier-form-label">Address</label>
           <input
-            type="number"
-            min="0"
             className="supplier-form-input"
-            value={form.leadTimeDays}
-            onChange={(e) => setForm({ ...form, leadTimeDays: e.target.value })}
-            placeholder="e.g. 7"
+            value={form.address}
+            onChange={(e) => setForm({ ...form, address: e.target.value })}
+            placeholder="e.g. 123 Main St, Sahiwal"
           />
 
           <button
@@ -147,7 +141,7 @@ export default function SupplierManager({ suppliers, onAddSupplier, onUpdateSupp
               <th>Name</th>
               <th>Email</th>
               <th>Phone</th>
-              <th>Lead (days)</th>
+              <th>Address</th>
               <th className="align-right"> </th>
             </tr>
           </thead>
@@ -157,7 +151,7 @@ export default function SupplierManager({ suppliers, onAddSupplier, onUpdateSupp
                 <td className="supplier-name-cell">{s.name}</td>
                 <td className="supplier-text-cell">{s.email || '—'}</td>
                 <td className="supplier-text-cell">{s.phone || '—'}</td>
-                <td className="supplier-text-cell">{s.leadTimeDays === '' || s.leadTimeDays === undefined ? '—' : s.leadTimeDays}</td>
+                <td className="supplier-text-cell">{s.address || '—'}</td>
                 <td className="supplier-action-cell">
                   <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
                     <button

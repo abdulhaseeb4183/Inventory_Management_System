@@ -52,7 +52,7 @@ export default function InventoryForm({ onAdd, onUpdate, editingItem, setEditing
 
     // Duplicate SKU check
     const isDuplicate = items.some(
-      (i) => i.sku?.trim().toLowerCase() === skuTrim.toLowerCase() && i.id !== editingItem?.id
+      (i) => i.sku?.trim().toLowerCase() === skuTrim.toLowerCase() && i._id !== editingItem?._id
     );
     if (isDuplicate) {
       setSkuError(`SKU "${skuTrim}" already exists in your catalog. Choose a unique SKU.`);
@@ -73,7 +73,7 @@ export default function InventoryForm({ onAdd, onUpdate, editingItem, setEditing
     };
 
     if (editingItem) {
-      onUpdate({ ...payload, id: editingItem.id });
+      onUpdate({ ...payload, _id: editingItem._id });
     } else {
       onAdd(payload);
     }
@@ -85,7 +85,7 @@ export default function InventoryForm({ onAdd, onUpdate, editingItem, setEditing
         (s) => s.name.trim().toLowerCase() === supplierTrimmed.toLowerCase()
       );
       if (!exists) {
-        onAddSupplier({ name: supplierTrimmed, email: '', phone: '', leadTimeDays: '' });
+        onAddSupplier({ name: supplierTrimmed, email: '', phone: '', address: '' });
       }
     }
 
@@ -167,7 +167,7 @@ export default function InventoryForm({ onAdd, onUpdate, editingItem, setEditing
         {/* datalist gives native autocomplete from saved suppliers */}
         <datalist id="supplier-list">
           {suppliers.map((s) => (
-            <option key={s.id ?? s.name} value={s.name} />
+            <option key={s._id ?? s.name} value={s.name} />
           ))}
         </datalist>
         <input

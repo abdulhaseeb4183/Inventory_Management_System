@@ -96,7 +96,7 @@ export default function FinancialDashboard({ items = [], orders = [], purchaseOr
 
     orders.filter(o => o.status !== 'Returned').forEach(o => {
       (o.lineItems || []).forEach(line => {
-        const product = items.find(it => it.id === line.itemId);
+        const product = items.find(it => it._id === line.itemId);
         const cat = product?.category || 'Uncategorized';
         if (!cats[cat]) cats[cat] = { category: cat, revenue: 0, cost: 0 };
         const revenue = (Number(line.unitPrice) || 0) * (Number(line.quantity) || 0);
@@ -117,7 +117,7 @@ export default function FinancialDashboard({ items = [], orders = [], purchaseOr
 
     orders.filter(o => o.status !== 'Returned').forEach(o => {
       (o.lineItems || []).forEach(line => {
-        const product = items.find(it => it.id === line.itemId);
+        const product = items.find(it => it._id === line.itemId);
         const key = line.itemId;
         if (!prods[key]) {
           prods[key] = {
