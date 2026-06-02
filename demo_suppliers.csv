@@ -1,7 +1,7 @@
-name,email,phone,leadTimeDays
-TechSupply Co.,orders@techsupply.com,+92-300-1234567,5
-Global Parts Ltd.,procurement@globalparts.net,+92-321-9876543,10
-Acme Electronics,sales@acmeelectronics.pk,+92-333-4567890,7
-OfficeWorld Store,bulk@officeworld.com,+92-311-2233445,3
-FastShip Wholesale,contact@fastship.pk,+92-345-6677889,2
-PrimeStat Suppliers,info@primestat.com,+92-301-9988776,14
+name,email,phone,address
+NexTech Distribution,sales@nextech-dist.com,+92-300-1234567,Plot 45-B Industrial Area, Sahiwal
+AeroTextile Industries,info@aerotextile.com,+92-311-9876543,Sector 12 Korangi, Karachi
+TimberCraft Carpentry,contact@timbercraft.com,+92-333-5558888,Circular Road, Multan
+Organic Beans Co.,orders@organicbeans.com,+92-321-4441111,Ferozepur Road, Lahore
+Herbal Beauty Lab,support@herbalbeauty.com,+92-345-6663333,PWD Colony, Islamabad
+Apex Industrial Parts,industrial@apexparts.com,+92-301-2227777,Small Industrial Estate, Sahiwal

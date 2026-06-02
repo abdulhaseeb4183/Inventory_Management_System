@@ -45,6 +45,7 @@ export default function AddProductWorkspace({
         quantity: Number(row.quantity) || 0,
         costPrice: Number(row.costPrice) || 10,
         sellingPrice: Number(row.sellingPrice) || 15,
+        supplierName: (row.supplierName || row.supplier || '').trim(),
       });
     });
   };
