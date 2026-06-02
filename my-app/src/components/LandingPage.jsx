@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
+import { itemsApi } from '../api/itemsApi';
+import { ordersApi } from '../api/ordersApi';
 import '../styles/LandingPage.css';
 
 const FEATURES = [
@@ -55,23 +57,12 @@ export default function LandingPage() {
     try { return localStorage.getItem('sm_darkMode') === 'true'; } catch { return false; }
   });
 
-  // Live snapshot numbers pulled from localStorage
-  const [snapshot, setSnapshot] = useState(() => {
-    try {
-      const items   = JSON.parse(localStorage.getItem('sm_items')  || '[]');
-      const orders  = JSON.parse(localStorage.getItem('sm_orders') || '[]');
-      const stockValue = items.reduce(
-        (sum, it) => sum + (Number(it.quantity) || 0) * (Number(it.costPrice) || 10), 0
-      );
-      return {
-        products:   items.length,
-        stockValue: stockValue,
-        orders:     orders.length,
-        pending:    orders.filter(o => o.status === 'Pending').length,
-      };
-    } catch {
-      return { products: 0, stockValue: 0, orders: 0, pending: 0 };
-    }
+  // Live snapshot numbers pulled from MongoDB Atlas
+  const [snapshot, setSnapshot] = useState({
+    products: 0,
+    stockValue: 0,
+    orders: 0,
+    pending: 0,
   });
 
   // Sync dark mode to localStorage and apply to <html>
@@ -79,6 +70,46 @@ export default function LandingPage() {
     document.documentElement.className = darkMode ? 'dark-mode' : '';
     try { localStorage.setItem('sm_darkMode', String(darkMode)); } catch { /* ignore */ }
   }, [darkMode]);
+
+  // Fetch real-time snapshot data from MongoDB Atlas
+  useEffect(() => {
+    async function fetchSnapshot() {
+      try {
+        const [items, orders] = await Promise.all([
+          itemsApi.getAll(),
+          ordersApi.getAll(),
+        ]);
+        const stockValue = items.reduce(
+          (sum, it) => sum + (Number(it.quantity) || 0) * (Number(it.costPrice) || 10), 0
+        );
+        setSnapshot({
+          products: items.length,
+          stockValue: stockValue,
+          orders: orders.length,
+          pending: orders.filter(o => o.status === 'Pending').length,
+        });
+      } catch (err) {
+        console.error('Failed to load landing page snapshot:', err);
+        // Fallback to localStorage
+        try {
+          const items = JSON.parse(localStorage.getItem('sm_items') || '[]');
+          const orders = JSON.parse(localStorage.getItem('sm_orders') || '[]');
+          const stockValue = items.reduce(
+            (sum, it) => sum + (Number(it.quantity) || 0) * (Number(it.costPrice) || 10), 0
+          );
+          setSnapshot({
+            products: items.length,
+            stockValue: stockValue,
+            orders: orders.length,
+            pending: orders.filter(o => o.status === 'Pending').length,
+          });
+        } catch {
+          // Keep default zeros if parsing fails
+        }
+      }
+    }
+    fetchSnapshot();
+  }, []);
 
   return (
     <div className="landing-page lp-page-wrapper">
@@ -197,7 +228,7 @@ export default function LandingPage() {
             {[
               [`${snapshot.products} SKUs`, 'In your catalog'],
               [`${snapshot.orders} orders`, 'All time'],
-              ['Persisted', 'Browser storage'],
+              ['Persisted', 'MongoDB Atlas'],
             ].map(([a, b]) => (
               <div key={a} className="lp-stat-card">
                 <div className="lp-stat-title">{a}</div>
