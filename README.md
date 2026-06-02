@@ -122,5 +122,19 @@ Open **http://localhost:5173** (or the port shown in your terminal).
 |----------|-------------|
 | `VITE_API_URL` | Backend API base URL |
 
-## License
-MIT
+## ScreenShots
+
+<img width="1919" height="1013" alt="image" src="https://github.com/user-attachments/assets/47906751-02d5-429f-9f5e-bbcbbc4cf79c" />
+<img width="1919" height="948" alt="image" src="https://github.com/user-attachments/assets/765089db-0f5e-4187-89ee-46538d13216d" />
+<img width="1916" height="955" alt="image" src="https://github.com/user-attachments/assets/052af912-3be5-469b-a082-24068356664b" />
+<img width="1912" height="956" alt="image" src="https://github.com/user-attachments/assets/8f3fecf6-8282-41c9-a989-d418ea9c70d4" />
+<img width="1912" height="948" alt="image" src="https://github.com/user-attachments/assets/a3135797-6736-42ad-803f-548817a1f87d" />
+<img width="1919" height="951" alt="image" src="https://github.com/user-attachments/assets/a01f3bc8-af54-48ce-a5c2-438c6a7c6769" />
+<img width="1919" height="948" alt="image" src="https://github.com/user-attachments/assets/e6eff591-2aab-4519-a02e-204fab12a7bb" />
+<img width="1919" height="946" alt="image" src="https://github.com/user-attachments/assets/556ce837-98c8-48cc-af80-b5f686a71e96" />
+<img width="1919" height="932" alt="image" src="https://github.com/user-attachments/assets/76490b04-d877-4bdc-891b-f791d1accd7e" />
+<img width="1919" height="943" alt="image" src="https://github.com/user-attachments/assets/80e5b557-e4cd-4cb2-85f4-4f7be8d2e718" />
+<img width="1918" height="939" alt="image" src="https://github.com/user-attachments/assets/8211fc11-a00b-4881-9b10-031dcad8556a" />
+<img width="1919" height="934" alt="image" src="https://github.com/user-attachments/assets/af19fdca-2267-4100-ab1d-bbf0bf6d5e94" />
+
+
