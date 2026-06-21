@@ -11,7 +11,7 @@ export default function AddProductWorkspace({
   suppliers = [],
   onAddSupplier,
   lowStockItems,
-  safetyStock = 5,
+  safetyStock = 10,
   onGoToOverview,
   onOpenPurchaseOrder,
   onAdd,
@@ -21,6 +21,7 @@ export default function AddProductWorkspace({
   onDelete,
   onAdjustStock,
   onEditFromTable,
+  onOpenProductModal,
 }) {
   const metrics = (() => {
     const totalProducts = items.length;
@@ -121,32 +122,42 @@ export default function AddProductWorkspace({
                 {items.length === 0 ? (
                   <div className="workspace-chart-empty">Save your first product to populate this chart.</div>
                 ) : (
-                  <InventoryChart items={items} variant="embedded" />
+                  <InventoryChart items={items} variant="embedded" safetyStock={safetyStock} />
                 )}
               </div>
             </div>
           </aside>
 
-          <section className="workspace-form-section" aria-label="Product form">
+          <section className="workspace-form-section" aria-label="Product entry card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '340px', padding: '2.5rem', textAlign: 'center' }}>
             <div className="workspace-form-deco" aria-hidden />
-            <div className="workspace-form-content">
-              <h3 className="workspace-form-title">
-                Product record
+            <div className="workspace-form-content" style={{ zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <div style={{ fontSize: '3.5rem', marginBottom: '1.25rem' }}>📦</div>
+              <h3 className="workspace-form-title" style={{ fontSize: '1.4rem', fontWeight: 700, margin: '0 0 0.5rem 0', color: 'var(--text-h)' }}>
+                Product catalog addition
               </h3>
-              <p className="workspace-form-desc">
-                Required fields are marked by the browser. SKU must stay unique in your catalog.
+              <p className="workspace-form-desc" style={{ maxWidth: '340px', fontSize: '0.9rem', color: 'var(--text)', margin: '0 0 2rem 0', lineHeight: 1.5 }}>
+                Open the form to register new inventory products or import them using a bulk sheet.
               </p>
-              <InventoryForm
-                variant="workspace"
-                items={items}
-                categories={categories}
-                suppliers={suppliers}
-                onAddSupplier={onAddSupplier}
-                onAdd={onAdd}
-                onUpdate={onUpdate}
-                editingItem={editingItem}
-                setEditingItem={setEditingItem}
-              />
+              <button
+                type="button"
+                className="inventory-form-btn-submit"
+                style={{
+                  background: 'var(--accent)',
+                  color: 'white',
+                  border: 'none',
+                  padding: '12px 28px',
+                  borderRadius: '10px',
+                  fontWeight: '700',
+                  fontSize: '0.95rem',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 14px rgba(170, 59, 255, 0.25)',
+                  transition: 'all 0.2s ease',
+                  width: 'auto'
+                }}
+                onClick={onOpenProductModal}
+              >
+                ✚ Add Product Details
+              </button>
             </div>
           </section>
         </div>
@@ -167,7 +178,7 @@ export default function AddProductWorkspace({
             expectedHeaders={['name']}
             title="Bulk import products via CSV"
           />
-          <InventoryTable items={items} onDelete={onDelete} onEdit={onEditFromTable} onAdjustStock={onAdjustStock} />
+          <InventoryTable items={items} onDelete={onDelete} onEdit={onEditFromTable} onAdjustStock={onAdjustStock} safetyStock={safetyStock} />
         </section>
       </div>
     </div>

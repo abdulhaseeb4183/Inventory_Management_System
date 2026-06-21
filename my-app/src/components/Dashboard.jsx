@@ -7,6 +7,7 @@ import InventorySummary from './InventorySummary';
 import SupplierManager from './SupplierManager';
 import PurchaseOrderModal from './PurchaseOrderModal';
 import OrderManager from './OrderManager';
+import ProductModal from './ProductModal';
 import AddProductWorkspace from './AddProductWorkspace';
 import PurchaseOrderManager from './PurchaseOrderManager';
 import FinancialDashboard from './FinancialDashboard';
@@ -56,9 +57,10 @@ export default function Dashboard() {
   });
 
   const [editingItem, setEditingItem] = useState(null);
+  const [isProductModalOpen, setProductModalOpen] = useState(false);
   const [activeTab, setActiveTab]     = useState('inventory');
   const [poItem, setPoItem]           = useState(null);
-  const safetyStock = 5;
+  const safetyStock = 10;
 
   // ── Persist dark mode preference ──
   useEffect(() => { try { localStorage.setItem('sm_darkMode', String(darkMode)); } catch { /* ignore */ } }, [darkMode]);
@@ -476,7 +478,7 @@ export default function Dashboard() {
 
         {activeTab === 'inventory' && (
         <>
-          <InventorySummary items={items} />
+          <InventorySummary items={items} safetyStock={safetyStock} />
 
           {items.length > 0 && lowStockItems.length > 0 && (
             <section className="alert-section" aria-label="Actionable low-stock alerts">
@@ -517,15 +519,16 @@ export default function Dashboard() {
 
           <main className="dashboard-content-grid">
             <div>
-              <InventoryChart items={items} />
+              <InventoryChart items={items} safetyStock={safetyStock} />
               <InventoryTable
                 items={items}
                 onDelete={deleteItem}
                 onEdit={(item) => {
                   setEditingItem(item);
-                  setActiveTab('inventory-add');
+                  setProductModalOpen(true);
                 }}
                 onAdjustStock={adjustStock}
+                safetyStock={safetyStock}
               />
             </div>
           </main>
@@ -552,7 +555,11 @@ export default function Dashboard() {
           onAdjustStock={adjustStock}
           onEditFromTable={(item) => {
             setEditingItem(item);
-            setActiveTab('inventory-add');
+            setProductModalOpen(true);
+          }}
+          onOpenProductModal={() => {
+            setEditingItem(null);
+            setProductModalOpen(true);
           }}
         />
       )}
@@ -603,6 +610,22 @@ export default function Dashboard() {
             }}
           />
         )}
+
+        <ProductModal
+          isOpen={isProductModalOpen}
+          onClose={() => {
+            setProductModalOpen(false);
+            setEditingItem(null);
+          }}
+          items={items}
+          categories={[]}
+          suppliers={suppliers}
+          onAddSupplier={addSupplier}
+          onAdd={addItem}
+          onUpdate={updateItem}
+          editingItem={editingItem}
+          setEditingItem={setEditingItem}
+        />
       </div>
     </div>
   );

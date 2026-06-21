@@ -11,7 +11,7 @@ import {
 } from 'recharts';
 import '../styles/InventoryChart.css';
 
-export default function InventoryChart({ items, variant = 'default' }) {
+export default function InventoryChart({ items, variant = 'default', safetyStock = 10 }) {
   if (!items || items.length === 0) {
     return null;
   }
@@ -48,7 +48,7 @@ export default function InventoryChart({ items, variant = 'default' }) {
           />
           <Bar dataKey="quantity" radius={[6, 6, 0, 0]}>
             {items.map((entry, index) => {
-              const isLowStock = entry.quantity < 5;
+              const isLowStock = entry.quantity < safetyStock;
               return (
                 <Cell 
                   key={`cell-${index}`} 

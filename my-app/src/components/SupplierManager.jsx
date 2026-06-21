@@ -1,136 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import CsvUploader from './CsvUploader';
+import React, { useState } from 'react';
+import SupplierModal from './SupplierModal';
 import '../styles/SupplierManager.css';
 
-const emptyForm = {
-  name: '',
-  email: '',
-  phone: '',
-  address: '',
-};
-
 export default function SupplierManager({ suppliers, onAddSupplier, onUpdateSupplier, onDeleteSupplier }) {
-  const [form, setForm] = useState(emptyForm);
   const [editingSupplier, setEditingSupplier] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteConfirmId, setDeleteConfirmId] = useState(null);
 
-  useEffect(() => {
-    if (editingSupplier) {
-      setForm({
-        name: editingSupplier.name ?? '',
-        email: editingSupplier.email ?? '',
-        phone: editingSupplier.phone ?? '',
-        address: editingSupplier.address ?? '',
-      });
-    } else {
-      setForm(emptyForm);
-    }
-  }, [editingSupplier]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const name = form.name.trim();
-    if (!name) return;
-    const payload = {
-      name,
-      email: form.email.trim(),
-      phone: form.phone.trim(),
-      address: form.address.trim(),
-    };
-
-    if (editingSupplier) {
-      onUpdateSupplier({ ...payload, _id: editingSupplier._id });
-      setEditingSupplier(null);
-    } else {
-      onAddSupplier(payload);
-    }
-    setForm(emptyForm);
+  const handleEdit = (supplier) => {
+    setEditingSupplier(supplier);
+    setIsModalOpen(true);
   };
 
-  const handleBulkUpload = (data) => {
-    data.forEach((row) => {
-      const name = (row.name || '').trim();
-      if (!name) return;
-      onAddSupplier({
-        name,
-        email: (row.email || '').trim(),
-        phone: (row.phone || '').trim(),
-        address: (row.address || '').trim(),
-      });
-    });
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setEditingSupplier(null);
   };
 
   return (
     <div className="supplier-manager-container">
-      <div className="supplier-form-card">
-        <h2 className="supplier-form-title">
-          {editingSupplier ? 'Update supplier' : 'Add supplier'}
-        </h2>
-        <form onSubmit={handleSubmit}>
-          <label className="supplier-form-label">
-            Supplier name <span>*</span>
-          </label>
-          <input
-            className="supplier-form-input"
-            value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
-            placeholder="e.g. Acme Wholesale Co."
-            required
-          />
-
-          <label className="supplier-form-label">Contact email</label>
-          <input
-            type="email"
-            className="supplier-form-input"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
-            placeholder="orders@supplier.com"
-          />
-
-          <label className="supplier-form-label">Phone</label>
-          <input
-            type="tel"
-            className="supplier-form-input"
-            value={form.phone}
-            onChange={(e) => setForm({ ...form, phone: e.target.value })}
-            placeholder="+1 (555) 000-0000"
-          />
-
-          <label className="supplier-form-label">Address</label>
-          <input
-            className="supplier-form-input"
-            value={form.address}
-            onChange={(e) => setForm({ ...form, address: e.target.value })}
-            placeholder="e.g. 123 Main St, Sahiwal"
-          />
-
+      <div className="supplier-manager-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', padding: '0 2rem' }}>
+        <div>
+          <h1 style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--text-h)', margin: 0 }}>Supplier Management</h1>
+          <p style={{ margin: '0.25rem 0 0 0', color: 'var(--text)', fontSize: '0.95rem' }}>Maintain vendor directory and contact information.</p>
+        </div>
+        <div>
           <button
-            type="submit"
+            type="button"
             className="supplier-submit-btn"
+            style={{ width: 'auto', padding: '12px 24px', marginTop: 0, borderRadius: '10px' }}
+            onClick={() => {
+              setEditingSupplier(null);
+              setIsModalOpen(true);
+            }}
           >
-            {editingSupplier ? 'Update supplier' : 'Save supplier'}
+            ✚ Add Supplier
           </button>
-          {editingSupplier && (
-            <button
-              type="button"
-              className="supplier-cancel-btn"
-              onClick={() => setEditingSupplier(null)}
-            >
-              Cancel edit
-            </button>
-          )}
-        </form>
+        </div>
       </div>
 
-      <div style={{ padding: '0 2rem' }}>
-        <CsvUploader 
-          onUploadComplete={handleBulkUpload} 
-          expectedHeaders={['name']} 
-          title="Bulk import suppliers"
-        />
-      </div>
-
-      <div className="supplier-directory-card">
+      <div className="supplier-directory-card" style={{ margin: '0 2rem 2rem' }}>
         <h2 className="supplier-directory-title">Vendor directory</h2>
         <p className="supplier-directory-desc">
           Suppliers saved here can be matched automatically on purchase orders when the product vendor name matches.
@@ -156,7 +65,7 @@ export default function SupplierManager({ suppliers, onAddSupplier, onUpdateSupp
                   <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
                     <button
                       type="button"
-                      onClick={() => setEditingSupplier(s)}
+                      onClick={() => handleEdit(s)}
                       className="supplier-edit-btn"
                     >
                       Edit
@@ -198,6 +107,15 @@ export default function SupplierManager({ suppliers, onAddSupplier, onUpdateSupp
           <div className="supplier-empty-state">No suppliers yet. Add your first vendor above.</div>
         )}
       </div>
+
+      <SupplierModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onAddSupplier={onAddSupplier}
+        onUpdateSupplier={onUpdateSupplier}
+        editingSupplier={editingSupplier}
+        setEditingSupplier={setEditingSupplier}
+      />
     </div>
   );
 }

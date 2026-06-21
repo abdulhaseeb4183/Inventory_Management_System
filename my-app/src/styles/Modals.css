@@ -1,0 +1,140 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  overflow-y: auto;
+  animation: modalFadeIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-content {
+  background: var(--card-bg);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  max-width: 580px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: modalSlideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: 2.25rem;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--text);
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.modal-header {
+  margin-bottom: 1.75rem;
+  padding-right: 2rem;
+}
+
+.modal-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-h);
+  margin: 0;
+}
+
+.modal-subtitle {
+  font-size: 0.9rem;
+  color: var(--text);
+  margin: 0.5rem 0 0 0;
+  line-height: 1.5;
+}
+
+/* Modal form/input layouts overrides */
+.modal-body {
+  margin-top: 0.5rem;
+}
+
+/* Modal Tabs style */
+.modal-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+  gap: 1.5rem;
+}
+
+.modal-tab-btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  padding: 0.75rem 0;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.modal-tab-btn:hover {
+  color: var(--text-h);
+}
+
+.modal-tab-btn.active {
+  color: var(--accent);
+}
+
+.modal-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 99px;
+}
+
+/* Animations */
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalSlideUp {
+  from { transform: translateY(24px) scale(0.96); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* Custom adjustment styling inside modals if needed */
+.modal-body .inventory-form-shell {
+  padding: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.modal-body .inventory-form-btn-submit {
+  width: 100%;
+  margin-top: 1.25rem;
+}

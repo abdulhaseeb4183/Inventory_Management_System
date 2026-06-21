@@ -29,7 +29,7 @@ function MarginBadge({ item }) {
   );
 }
 
-export default function InventoryTable({ items, onDelete, onEdit, onAdjustStock }) {
+export default function InventoryTable({ items, onDelete, onEdit, onAdjustStock, safetyStock = 10 }) {
   const [adjustRowId, setAdjustRowId]     = useState(null);
   const [adjustAmount, setAdjustAmount]   = useState('1');
   const [deleteConfirmId, setDeleteConfirmId] = useState(null);
@@ -113,7 +113,7 @@ export default function InventoryTable({ items, onDelete, onEdit, onAdjustStock 
         </thead>
         <tbody>
           {filteredItems.map((item) => {
-            const isLow        = item.quantity < 5;
+            const isLow        = item.quantity < safetyStock;
             const sku          = item.sku?.trim();
             const skuDisplay   = sku || '—';
             const isAdjustOpen = adjustRowId === item._id;

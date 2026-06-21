@@ -22,6 +22,7 @@ function priceOrDefault(v, def) {
 
 export default function InventoryForm({ onAdd, onUpdate, editingItem, setEditingItem, variant = 'default', items = [], suppliers = [], onAddSupplier }) {
   const isWorkspace = variant === 'workspace';
+  const isModal = variant === 'modal';
   const [formData, setFormData] = useState(emptyForm);
   const [skuError, setSkuError] = useState('');
 
@@ -95,8 +96,8 @@ export default function InventoryForm({ onAdd, onUpdate, editingItem, setEditing
   };
 
   return (
-    <div className={`inventory-form-shell ${isWorkspace ? 'workspace-mode' : ''}`}>
-      {!isWorkspace && (
+    <div className={`inventory-form-shell ${isWorkspace ? 'workspace-mode' : ''} ${isModal ? 'modal-mode' : ''}`}>
+      {!isWorkspace && !isModal && (
         <h2 className="inventory-form-title">
           {editingItem ? 'Edit Product' : 'Add New Product'}
         </h2>

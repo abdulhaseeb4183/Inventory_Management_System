@@ -1,10 +1,10 @@
 import React from 'react';
 import '../styles/InventorySummary.css';
 
-export default function InventorySummary({ items }) {
+export default function InventorySummary({ items, safetyStock = 10 }) {
   const totalProducts = items.length;
   const totalStock = items.reduce((sum, item) => sum + (item.quantity || 0), 0);
-  const lowStockCount = items.filter(item => item.quantity < 5).length;
+  const lowStockCount = items.filter(item => item.quantity < safetyStock).length;
 
   return (
     <div className="inventory-summary-container">
